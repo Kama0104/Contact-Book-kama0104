@@ -21,7 +21,7 @@
       const contactId = ref(route.params.id);
       const contact = ref(getContactById(contactId.value));
   
-      // Function to delete the contact
+      // to delete the contact
       const deleteContact = () => {
         deleteContact(contactId.value);
         route.push({ name: 'ContactList' });

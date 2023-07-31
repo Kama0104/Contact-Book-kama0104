@@ -43,7 +43,7 @@
         email: contact ? contact.email : '',
       });
   
-      // Function to submit the form
+      // to submit the form
       const submitForm = (event) => {
         event.preventDefault();
         if (props.formType === 'new') {
