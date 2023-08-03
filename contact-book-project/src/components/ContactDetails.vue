@@ -16,7 +16,23 @@
 <script>
 export default {
   props: {
-    contact: Object, // Contact object
+    contact: {
+      type: Object,
+      required: true,
+      validator: (value) => {
+        // Validate the structure of the contact object
+        return (
+          typeof value === 'object' &&
+          'id' in value &&
+          'firstName' in value &&
+          'lastName' in value &&
+          'email' in value &&
+          'phone' in value &&
+          'address' in value &&
+          'notes' in value
+        );
+      },
+    },
   },
   methods: {
     editContact() {
@@ -29,3 +45,19 @@ export default {
   },
 };
 </script>
+<style>
+.contact-details {
+  margin: 20px 0;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.contact-details p {
+  margin: 5px 0;
+}
+
+.contact-details button {
+  margin-top: 10px;
+}
+</style>

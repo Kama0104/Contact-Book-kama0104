@@ -1,40 +1,31 @@
 <template>
   <div>
-    <h2>Add New Contact</h2>
-    <ContactForm @add-contact="addContact" />
+    <h2>New Contact</h2>
+    <ContactForm :initialData="formData" @submit-form="submitForm" />
   </div>
 </template>
 
 <script>
 import ContactForm from '@/components/ContactForm.vue';
-import { getContactsFromLocalStorage, updateLocalStorage } from '@/utils/LocalStorageUtils.js';
 
 export default {
   components: {
     ContactForm,
   },
-  props: {
-    contacts: Array, // Array of contacts
+  data() {
+    return {
+      formData: {
+        firstName: '',
+        lastName: '',
+        email: '',
+      },
+    };
   },
   methods: {
-    addContact(newContact) {
-      // Generate a unique ID for the new contact
-      newContact.id = generateUniqueId();
-
-      // Add the new contact to the contacts array
-      this.contacts.push(newContact);
-
-      // Update the Local Storage with the updated contacts array
-      updateLocalStorage(this.contacts);
-
-      // Use Vue Router to navigate to the contact details view for the new contact
-      this.$router.push({ path: `/contact/${newContact.id}` });
+    submitForm(newContact) {
+      console.log('New Contact Data:', newContact); 
+      this.$emit('add-contact', newContact);
     },
   },
 };
-
-// Helper function to generate a unique ID for a new contact
-function generateUniqueId() {
-  return '_' + Math.random().toString(36).substr(2, 9);
-}
 </script>

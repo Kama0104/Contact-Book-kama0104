@@ -1,9 +1,11 @@
 <template>
   <div>
-    <h2>Contacts</h2>
-    <ul>
-      <li v-for="contact in sortedContacts" :key="contact.id" @click="showContactDetails(contact)">
-        {{ contact.firstName }} {{ contact.lastName }}
+    <h2>Contact List</h2>
+    <ul class="contact-list">
+      <li v-for="contact in sortedContacts" :key="contact.id">
+        <span>{{ contact.firstName }} {{ contact.lastName }}</span>
+        <button @click="showDetails(contact.id)">View Details</button>
+        <button @click="deleteContact(contact.id)">Delete</button>
       </li>
     </ul>
   </div>
@@ -12,18 +14,42 @@
 <script>
 export default {
   props: {
-    contacts: Array, // array of contacts
+    contacts: Array,
   },
   computed: {
     sortedContacts() {
-      // Sorting contacts by last name
-      return this.contacts.sort((a, b) => a.lastName.localeCompare(b.lastName));
+      return this.contacts.slice().sort((a, b) => a.lastName.localeCompare(b.lastName));
     },
   },
   methods: {
-    showContactDetails(contact) {
-      this.$emit('show-details', contact.id);
+    showDetails(contactId) {
+      this.$emit('show-details', contactId);
+    },
+    deleteContact(contactId) {
+      this.$emit('delete-contact', contactId);
     },
   },
 };
 </script>
+
+<style>
+.contact-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.contact-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.contact-list li span {
+  flex: 1;
+  margin-right: 10px;
+}
+</style>

@@ -5,7 +5,7 @@
       <router-link to="/new">Add New Contact</router-link>
     </header>
     <main>
-      <router-view :contacts="contacts" @add-contact="addContact" @delete-contact="deleteContact" />
+      <router-view :contacts="state.contacts" :add-contact="addContact" :delete-contact="deleteContact" />
     </main>
   </div>
 </template>
@@ -14,49 +14,39 @@
 import { reactive } from 'vue';
 import router from './router';
 
+function getContactsFromLocalStorage() {
+  const contacts = JSON.parse(localStorage.getItem('contacts'));
+  return contacts ? contacts : [];
+}
+
+function updateLocalStorage(contacts) {
+  localStorage.setItem('contacts', JSON.stringify(contacts));
+}
+
+// to generate a unique ID for a new contact
+function generateUniqueId() {
+  return '_' + Math.random().toString(36).substr(2, 9);
+}
+
 export default {
   setup() {
-    // to create a reactive state
     const state = reactive({
       contacts: getContactsFromLocalStorage(),
     });
-
-    // Function to add a new contact to the contact list
     const addContact = (newContact) => {
-      // generate a unique ID for the new contact
       newContact.id = generateUniqueId();
-
-      // Add the new contact to the state's contacts array
       state.contacts.push(newContact);
 
-      // Update the Local Storage 
       updateLocalStorage(state.contacts);
     };
 
-    // Function to delete a contact from the contact list
+    // delete a contact 
     const deleteContact = (contactId) => {
-      // Filter out the contact with the provided ID from the contacts array
+      // Separate the contact with the provided ID from the contacts
       state.contacts = state.contacts.filter((contact) => contact.id !== contactId);
 
-      // Update the Local Storage with the updated contacts array
       updateLocalStorage(state.contacts);
     };
-
-    // Function to get contacts from Local Storage
-    function getContactsFromLocalStorage() {
-      const contacts = JSON.parse(localStorage.getItem('contacts'));
-      return contacts ? contacts : [];
-    }
-
-    // Function to update Local Storage with the current contacts array
-    function updateLocalStorage(contacts) {
-      localStorage.setItem('contacts', JSON.stringify(contacts));
-    }
-
-    // Function to generate a unique ID for a new contact
-    function generateUniqueId() {
-      return '_' + Math.random().toString(36).substr(2, 9);
-    }
 
     return { state, addContact, deleteContact };
   },
@@ -65,5 +55,19 @@ export default {
 </script>
 
 <style>
+#app {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
 
+header {
+  background-color: #f2f2f2;
+  padding: 10px;
+}
+
+header a {
+  margin-right: 10px;
+  text-decoration: none;
+}
 </style>

@@ -19,7 +19,22 @@ export default {
     ContactDetails,
   },
   props: {
-    contacts: Array, // Array of contacts
+    contacts: {
+      type: Array,
+      required: true,
+      validator: (value) => {
+        return value.every((contact) => (
+          typeof contact === 'object' &&
+          'id' in contact &&
+          'firstName' in contact &&
+          'lastName' in contact &&
+          'email' in contact &&
+          'phone' in contact &&
+          'address' in contact &&
+          'notes' in contact
+        ));
+      },
+    },
   },
   data() {
     return {
