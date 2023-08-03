@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import ContactForm from '@/components/ContactForm';
-import { getContactsFromLocalStorage, updateLocalStorage } from '@/utils/LocalStorageUtils';
+import ContactForm from '@/components/ContactForm.vue';
+import { getContactsFromLocalStorage, updateLocalStorage } from '@/utils/LocalStorageUtils.js';
 
 export default {
   components: {

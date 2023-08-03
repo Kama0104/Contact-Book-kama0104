@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import ContactDetails from '@/components/ContactDetails';
+import ContactDetails from '@/components/ContactDetails.vue';
 
 export default {
   components: {

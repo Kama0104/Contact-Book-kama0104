@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import EditContactForm from '@/components/EditContactForm';
-import { updateLocalStorage } from '@/utils/LocalStorageUtils';
+import EditContactForm from '@/components/EditContactForm.vue';
+import { updateLocalStorage } from '@/utils/LocalStorageUtils.js';
 
 export default {
   components: {
