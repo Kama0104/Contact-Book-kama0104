@@ -42,8 +42,7 @@ export default {
   },
   computed: {
     sortedContacts() {
-      if (this.contacts) {
-        // Sort contacts 
+      if (this.contacts) { 
         return this.contacts.sort((a, b) => a.lastName.localeCompare(b.lastName));
       } else {
         return [];
@@ -56,8 +55,6 @@ export default {
     },
     deleteContact(contactId) {
       this.contacts = this.contacts.filter((contact) => contact.id !== contactId);
-
-      // Update the Local Storage 
       updateLocalStorage(this.contacts);
     },
     addContact(newContact) {

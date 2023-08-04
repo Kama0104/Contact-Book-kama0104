@@ -5,8 +5,8 @@
     <p><strong>Phone:</strong> {{ contact.phone }}</p>
     <p><strong>Address:</strong> {{ contact.address }}</p>
     <p><strong>Notes:</strong> {{ contact.notes }}</p>
-    <button @click="editContact">Edit</button>
-    <button @click="deleteContact">Delete</button>
+    <!-- <button @click="editContact">Edit</button>
+    <button @click="deleteContact">Delete</button> -->
   </div>
   <div v-else>
     <p>Contact not found.</p>
@@ -20,7 +20,6 @@ export default {
       type: Object,
       required: true,
       validator: (value) => {
-        // Validate the structure of the contact object
         return (
           typeof value === 'object' &&
           'id' in value &&
@@ -39,7 +38,6 @@ export default {
       this.$emit('edit-contact', this.contact.id);
     },
     deleteContact() {
-      //  to delete the contact
       this.$emit('delete-contact', this.contact.id);
     },
   },

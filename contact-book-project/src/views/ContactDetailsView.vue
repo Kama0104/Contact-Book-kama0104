@@ -44,17 +44,13 @@ export default {
   created() {
     // Get the contact ID from the route params
     const contactId = this.$route.params.id;
-
-    // Find the contact with the corresponding ID in the contacts array
     this.contact = this.contacts.find((contact) => contact.id === contactId);
   },
   methods: {
     editContact() {
-      // Use Vue Router to navigate to the edit contact view
       this.$router.push({ path: `/edit/${this.contact.id}` });
     },
     deleteContact() {
-      // Emit an event to the parent component to delete the contact
       this.$emit('delete-contact', this.contact.id);
     },
   },

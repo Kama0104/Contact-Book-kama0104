@@ -18,6 +18,9 @@ export default {
         firstName: '',
         lastName: '',
         email: '',
+        phone:'',
+        address:'',
+        notes:''
       },
     };
   },

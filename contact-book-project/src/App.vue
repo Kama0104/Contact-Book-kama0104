@@ -42,7 +42,6 @@ export default {
 
     // delete a contact 
     const deleteContact = (contactId) => {
-      // Separate the contact with the provided ID from the contacts
       state.contacts = state.contacts.filter((contact) => contact.id !== contactId);
 
       updateLocalStorage(state.contacts);
