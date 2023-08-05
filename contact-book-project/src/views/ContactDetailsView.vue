@@ -18,24 +18,8 @@ export default {
   components: {
     ContactDetails,
   },
-  props: {
-    contacts: {
-      type: Array,
-      required: true,
-      validator: (value) => {
-        return value.every((contact) => (
-          typeof contact === 'object' &&
-          'id' in contact &&
-          'firstName' in contact &&
-          'lastName' in contact &&
-          'email' in contact &&
-          'phone' in contact &&
-          'address' in contact &&
-          'notes' in contact
-        ));
-      },
-    },
-  },
+  props: ['id'],
+
   data() {
     return {
       contact: null,
@@ -44,7 +28,7 @@ export default {
   created() {
     // Get the contact ID from the route params
     const contactId = this.$route.params.id;
-    this.contact = this.contacts.find((contact) => contact.id === contactId);
+    this.contact = getContactsFromLocalStorage().find((contact) => this.contact.id === contactId);
   },
   methods: {
     editContact() {

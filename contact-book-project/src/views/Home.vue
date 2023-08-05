@@ -22,27 +22,14 @@ export default {
   components: {
     ContactList,
   },
-  props: {
-    contacts: {
-      type: Array,
-      required: true,
-      validator: (value) => {
-        return value.every((contact) => (
-          typeof contact === 'object' &&
-          'id' in contact &&
-          'firstName' in contact &&
-          'lastName' in contact &&
-          'email' in contact &&
-          'phone' in contact &&
-          'address' in contact &&
-          'notes' in contact
-        ));
-      },
-    },
+  data() {
+    return {
+      contacts: []
+    };
   },
   computed: {
     sortedContacts() {
-      if (this.contacts) { 
+      if (this.contacts) {
         return this.contacts.sort((a, b) => a.lastName.localeCompare(b.lastName));
       } else {
         return [];
@@ -55,6 +42,7 @@ export default {
     },
     deleteContact(contactId) {
       this.contacts = this.contacts.filter((contact) => contact.id !== contactId);
+
       updateLocalStorage(this.contacts);
     },
     addContact(newContact) {
@@ -65,6 +53,11 @@ export default {
       this.$router.push({ path: `/contact/${newId}` });
     },
   },
+  created () {
+    this.contacts = getContactsFromLocalStorage();
+  }
+
+
 };
 </script>
 <style>

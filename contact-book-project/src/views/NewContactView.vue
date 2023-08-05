@@ -7,6 +7,7 @@
 
 <script>
 import ContactForm from '@/components/ContactForm.vue';
+import {updateLocalStorage, getContactsFromLocalStorage} from '@/components/ContactForm.vue';
 
 export default {
   components: {
@@ -22,13 +23,20 @@ export default {
         address:'',
         notes:''
       },
+      contacts: []
     };
   },
   methods: {
     submitForm(newContact) {
-      console.log('New Contact Data:', newContact); 
-      this.$emit('add-contact', newContact);
+      const newId = Date.now().toString();
+      newContact.id = newId;
+      this.contacts.push(newContact);
+      updateLocalStorage(this.contacts);
+      this.$router.push({path: `/contact/${newId}`});
     },
   },
+  created() {
+    this.contacts = getContactsFromLocalStorage();
+  }
 };
 </script>

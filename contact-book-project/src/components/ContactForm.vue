@@ -30,7 +30,6 @@ export default {
   },
   methods: {
     onSubmit() {
-      // Validate the form data
       if (!this.firstName || !this.lastName || !this.email) {
         alert('Please fill in all required fields.');
         return;
@@ -44,7 +43,7 @@ export default {
       };
 
       // for new contact submission
-      this.$emit('add-contact', newContact);
+      this.$emit('submit-form', newContact);
 
       // Clear the form fields
       this.firstName = '';

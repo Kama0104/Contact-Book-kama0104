@@ -23,7 +23,7 @@
 <script>
 export default {
   props: {
-    contact: Object, // Contact object to edit
+    contact: Object,
   },
   data() {
     return {
@@ -34,25 +34,19 @@ export default {
   },
   methods: {
     onSubmit() {
-      // Validate the form data
       if (!this.firstName || !this.lastName || !this.email) {
         alert('Please fill in all required fields.');
         return;
       }
-
-      // Create a copy of the edited contact object with the updated data
       const editedContact = {
         ...this.contact,
         firstName: this.firstName,
         lastName: this.lastName,
         email: this.email,
       };
-
-      // Emit an event to the parent component to handle the updated contact
       this.$emit('update-contact', editedContact);
     },
     cancelEdit() {
-      // Emit an event to the parent component to cancel the edit and go back to the contact details view
       this.$emit('cancel-edit');
     },
   },
