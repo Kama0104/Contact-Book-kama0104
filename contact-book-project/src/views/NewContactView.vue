@@ -7,7 +7,7 @@
 
 <script>
 import ContactForm from '@/components/ContactForm.vue';
-import {updateLocalStorage, getContactsFromLocalStorage} from '@/components/ContactForm.vue';
+import {updateLocalStorage, getContactsFromLocalStorage} from '../utils/LocalStorageUtils';
 
 export default {
   components: {
