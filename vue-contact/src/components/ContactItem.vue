@@ -82,9 +82,6 @@ li {
   .contact {
     flex: 1;
 
-    .completed-contact {
-        text-decoration: line-through;
-    }
 
     input[type="text"] {
       width: 100%;
